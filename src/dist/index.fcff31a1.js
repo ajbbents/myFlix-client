@@ -25266,19 +25266,19 @@ class MainView extends _reactDefault.default.Component {
                     _id: 1,
                     Title: 'Clueless',
                     Description: 'A high schooler befriends a new student and gives her a makeover.',
-                    ImagePath: '...'
+                    ImagePath: 'C:\Users\Alison\Documents\CareerFoundry\Immersion\Achievement2\movie_api\img\clueless.png'
                 },
                 {
                     _id: 2,
                     Title: 'Drumline',
                     Description: 'High school drumlines compete.',
-                    ImagePath: '...'
+                    ImagePath: 'C:\Users\Alison\Documents\CareerFoundry\Immersion\Achievement2\movie_api\img\drumline.png'
                 },
                 {
                     _id: 3,
-                    Title: 'Gladiator',
-                    Description: 'Gladiators compete and get makeovers.',
-                    ImagePath: '...'
+                    Title: 'Sixteen Candles',
+                    Description: 'A sad girl does not have a good birthday.',
+                    ImagePath: 'C:\Users\Alison\Documents\CareerFoundry\Immersion\Achievement2\movie_api\img\16candles.png'
                 }, 
             ],
             selectedMovie: null

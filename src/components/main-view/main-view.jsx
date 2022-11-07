@@ -10,16 +10,24 @@ export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [
-        { _id: 1, Title: 'Clueless', Description: 'A high schooler befriends a new student and gives her a makeover.', ImagePath: 'https://i.ytimg.com/vi/93Y6nTwxSJI/movieposter_en.jpg' },
-        { _id: 2, Title: 'Drumline', Description: 'High school drumlines compete.', ImagePath: 'https://i.ytimg.com/vi/fH_nm-KC52w/movieposter.jpg' },
-        { _id: 3, Title: 'Sixteen Candles', Description: 'A sad girl does not have a good birthday.', ImagePath: 'https://i.ytimg.com/vi/fWXLHlE9Iro/movieposter.jpg' },
-      ],
+      movies: [],
       selectedMovie: null
-    }
+    };
   }
 
-  setSelectedMovie(newSelectedMovie) {
+  componentDidMount() {
+    axios.get('https://pickles2001.herokuapp.com/movies')
+      .then(response => {
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  setSelectedMovie(movie) {
     this.setState({
       selectedMovie: newSelectedMovie
     });

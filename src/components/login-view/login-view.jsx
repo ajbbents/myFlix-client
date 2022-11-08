@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { RegistrationView } from "../registration-view/registration-view";
+
 export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -23,6 +25,7 @@ export function LoginView(props) {
         <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
       </label>
       <button type="submit" onClick={handleSubmit}>Submit</button>
+      <button type="button" onClick={RegistrationView}>Not registered yet?</button>
     </form>
   );
 }

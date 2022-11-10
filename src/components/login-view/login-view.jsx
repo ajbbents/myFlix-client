@@ -28,9 +28,28 @@ export function LoginView(props) {
       <Form.Group controlId="formPassword">
         <Form.Label>Password:</Form.Label>
         <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+      </Form.Group>
+      <Button variant="primary" type="submit" onClick={handleSubmit}>
+        Submit
+      </Button>
+      <Button variant="secondary" type="button" onClick={RegistrationView}>
+        Not registered yet?
+      </Button>
+    </Form>
   );
 }
 
 LoginView.propTypes = {
   onLoggedIn: PropTypes.func.isRequired,
 };
+
+{/* <label>
+Username:
+<input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+</label>
+<label>
+Password:
+<input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+</label>
+<button type="submit" onClick={handleSubmit}>Submit</button>
+<button type="button" onClick={RegistrationView}>Not registered yet?</button> */}

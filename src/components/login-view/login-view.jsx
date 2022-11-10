@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 
 import { RegistrationView } from "../registration-view/registration-view";
 
@@ -29,3 +31,7 @@ export function LoginView(props) {
     </form>
   );
 }
+
+LoginView.propTypes = {
+  onLoggedIn: PropTypes.func.isRequired,
+};

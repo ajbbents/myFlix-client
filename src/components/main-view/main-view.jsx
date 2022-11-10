@@ -61,6 +61,17 @@ export class MainView extends React.Component {
 
     return (
       <div className="main-view">
+        <Navbar bg="light" expand="lg">
+          <Container fluid>
+            <Navbar.Brand href="#home">BingeableFilms</Navbar.Brand>
+            <Nav className="navLinks">
+              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="#movies">Movies</Nav.Link>
+              <Nav.Link href="#users">Users</Nav.Link>
+              <Nav.Link href="#logout">Logout</Nav.Link>
+            </Nav>
+          </Container>
+        </Navbar>
 
         <Row className="justify-content-md-center">
           {selectedMovie

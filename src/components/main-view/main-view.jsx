@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import PropTypes from 'prop-types';
+import './main-view.scss';
 
 import { Container, Row, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
@@ -81,7 +82,7 @@ export class MainView extends React.Component {
               </Col>
             )
             : movies.map(movie => (
-              <Col md={3}>
+              <Col md={4}>
                 <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }} />
               </Col>
             ))

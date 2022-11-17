@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-
 import { RegistrationView } from "../registration-view/registration-view";
-import { Card } from 'react-bootstrap';
+import { Card, Form, Button } from 'react-bootstrap';
 
 import './login-view.scss';
 

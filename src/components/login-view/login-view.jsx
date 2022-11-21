@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import { RegistrationView } from "../registration-view/registration-view";
 import { Card, Form, Button } from 'react-bootstrap';
@@ -12,14 +13,25 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
+    // console.log(username, password);
     // send a request to the server for authentication
+    axios.post('https://pickles2001.herokuapp.com/login', {
+      UserName: username,
+      Password: password
+    })
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('no such user')
+      });
     // then call props.onLoggedIn(username)
-    props.onLoggedIn(username);
+    // props.onLoggedIn(username);
   };
 
   return (
-    <div className="login-view">
+    <Container className="login-view">
       <Card className="text-center" style={{ width: '25rem', padding: '2rem' }}>
         <Card.Body>
           <Card.Title>Login</Card.Title>
@@ -48,7 +60,7 @@ export function LoginView(props) {
         </Card.Body>
 
       </Card>
-    </div>
+    </Container>
   );
 }
 

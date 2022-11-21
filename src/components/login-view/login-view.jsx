@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import { RegistrationView } from "../registration-view/registration-view";
-import { Card, Form, Button } from 'react-bootstrap';
+import { Card, Form, Button, Container } from 'react-bootstrap';
 
 import './login-view.scss';
 

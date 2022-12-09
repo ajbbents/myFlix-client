@@ -10,6 +10,12 @@ export function RegistrationView(props) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [values, setValues] = useState({
+    nameErr: '',
+    usernameErr: '',
+    passwordErr: '',
+    emailErr: '',
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();

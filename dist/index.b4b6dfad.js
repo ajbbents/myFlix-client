@@ -27146,7 +27146,7 @@ class MainView extends (0, _reactDefault.default).Component {
         }
     }
     getMovies(token) {
-        (0, _axiosDefault.default).get("https://erin-real-squirrel.cyclic.app/movies", {
+        (0, _axiosDefault.default).get("https://pickles2001.herokuapp.com/movies", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -47649,7 +47649,7 @@ function LoginView(props) {
         e.preventDefault();
         const isReq = validate();
         if (isReq) // send a request to the server for authentication
-        (0, _axiosDefault.default).post("https://erin-real-squirrel.cyclic.app/login", {
+        (0, _axiosDefault.default).post("https://pickles2001.herokuapp.com/login", {
             UserName: username,
             Password: password
         }).then((response)=>{

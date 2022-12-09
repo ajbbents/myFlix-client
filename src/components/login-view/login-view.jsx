@@ -40,7 +40,7 @@ export function LoginView(props) {
     const isReq = validate();
     if (isReq) {
       // send a request to the server for authentication
-      axios.post('https://erin-real-squirrel.cyclic.app/login', {
+      axios.post('https://pickles2001.herokuapp.com/login', {
         UserName: username,
         Password: password
       })

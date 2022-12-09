@@ -28,7 +28,7 @@ export default class ProfileView extends React.Component {
     console.log(movie)
     axios
       .delete(
-        `https://erin-real-squirrel.cyclic.app/users/${Username}/movies/${movie}`,
+        `https://pickles2001.herokuapp.com/users/${Username}/movies/${movie}`,
         { headers: { Authorization: `Bearer ${token}}` } }
       )
       .then((response) => {
@@ -53,7 +53,7 @@ export default class ProfileView extends React.Component {
   getUser = (token) => {
     const Username = localStorage.getItem("user");
     axios
-      .get(`https://erin-real-squirrel.cyclic.app/users/${Username}`, {
+      .get(`https://pickles2001.herokuapp.com/users/${Username}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -75,7 +75,7 @@ export default class ProfileView extends React.Component {
     const Username = localStorage.getItem("user");
     const token = localStorage.getItem("token");
     axios
-      .put(`https://erin-real-squirrel.cyclic.app/users/${Username}`,
+      .put(`https://pickles2001.herokuapp.com/users/${Username}`,
         {
           Username: this.state.Username,
           Password: this.state.Password,

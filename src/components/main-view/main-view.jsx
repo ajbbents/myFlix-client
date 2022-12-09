@@ -1,14 +1,19 @@
 import React from "react";
 import axios from "axios";
 import PropTypes from 'prop-types';
+
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+
 import './main-view.scss';
 
-import { Container, Row, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Container, Row, Col, Button, Navbar, Nav } from 'react-bootstrap';
 
 import { RegistrationView } from "../registration-view/registration-view";
 import { LoginView } from "../login-view/login-view";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { NavigationBar } from "../navigation-bar/navigation-bar";
+// import { ProfileView } from "../profile-view/profile-view";
 
 export class MainView extends React.Component {
 
@@ -16,30 +21,38 @@ export class MainView extends React.Component {
     super();
     this.state = {
       movies: [],
-      selectedMovie: null,
-      user: null
+      // selectedMovie: null,
+      user: null,
+      register: null
     };
   }
 
   componentDidMount() {
-    axios.get('https://pickles2001.herokuapp.com/movies')
-      .then(response => {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
+  }
+
+  getMovies(token) {
+    axios.get('https://erin-real-squirrel.cyclic.app/movies', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => {
+        //assign the result to the state
         this.setState({
-          movies: response.data
+          movies: response.data,
         });
       })
-      .catch(error => {
+      .catch(function (error) {
         console.log(error);
       });
   }
 
-  setSelectedMovie(movie) {
-    this.setState({
-      selectedMovie: movie
-    });
-  }
-
-  onLoggedIn(user) {
+  onLoggedIn(authData) {
     console.log(authData);
     this.setState({
       user: authData.user.Username
@@ -50,35 +63,24 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
-  getMovies(token) {
-    axios.get('https://pickles2001.herokuapp.com/movies', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        //assign the result to the state
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
   onRegistration(register) {
     this.setState({
       register
     });
   }
 
-  render() {
-    const { movies, selectedMovie, user, register } = this.state;
+  onLoggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null
+    });
+  }
 
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+  render() {
+    const { movies, selectedMovie, user, register, authData } = this.state;
 
     // if (!register) return (<RegistrationView onRegistration={(register) => this.onRegistration(register)} />)
-
-    if (movies.length === 0) return <div className="main-view" />;
 
     return (
       <div className="main-view">

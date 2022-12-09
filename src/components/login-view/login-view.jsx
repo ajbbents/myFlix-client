@@ -10,24 +10,48 @@ import './login-view.scss';
 export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  //declare hook for each input
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+
+  //validate user inputs
+  const validate = () => {
+    let isReq = true;
+    if (!username) {
+      setUsernameErr('You have to have a username');
+      isReq = false;
+    } else if (username.length < 2) {
+      setUsernameErr('Username must be at least 2 characters long');
+      isReq = false;
+    }
+    if (!password) {
+      setPasswordErr('You have to have a password');
+      isReq = false;
+    } else if (password.length < 6) {
+      setPasswordErr('Password must be at least 6 characters long');
+      isReq = false;
+    }
+
+    return isReq;
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(username, password);
-    // send a request to the server for authentication
-    axios.post('https://pickles2001.herokuapp.com/login', {
-      UserName: username,
-      Password: password
-    })
-      .then(response => {
-        const data = response.data;
-        props.onLoggedIn(data);
+    const isReq = validate();
+    if (isReq) {
+      // send a request to the server for authentication
+      axios.post('https://erin-real-squirrel.cyclic.app/login', {
+        UserName: username,
+        Password: password
       })
-      .catch(e => {
-        console.log('no such user')
-      });
-    // then call props.onLoggedIn(username)
-    // props.onLoggedIn(username);
+        .then(response => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch(e => {
+          console.log('no such user')
+        });
+    }
   };
 
   return (
@@ -40,12 +64,16 @@ export function LoginView(props) {
             <Form>
               <Form.Group controlId="formUsername">
                 <Form.Label>Username:</Form.Label>
-                <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
+                <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
+                {/*code here to display validation error*/}
+                {usernameErr && <p>{usernameErr}</p>}
               </Form.Group>
 
               <Form.Group controlId="formPassword">
                 <Form.Label>Password:</Form.Label>
-                <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+                <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
+                {/*code here to display validation error*/}
+                {passwordErr && <p>{passwordErr}</p>}
               </Form.Group>
 
               <Button variant="primary" type="submit" onClick={handleSubmit}>

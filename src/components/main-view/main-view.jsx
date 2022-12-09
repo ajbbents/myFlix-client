@@ -83,32 +83,6 @@ export class MainView extends React.Component {
     // if (!register) return (<RegistrationView onRegistration={(register) => this.onRegistration(register)} />)
 
     return (
-      <div className="main-view">
-        <Navbar bg="light" expand="lg">
-          <Container fluid>
-            <Navbar.Brand href="#home">BingeableFilms</Navbar.Brand>
-            <Nav className="navLinks">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#movies">Movies</Nav.Link>
-              <Nav.Link href="#users">Users</Nav.Link>
-              <Nav.Link href="#logout">Logout</Nav.Link>
-            </Nav>
-          </Container>
-        </Navbar>
-
-        <Row className="justify-content-md-center">
-          {selectedMovie
-            ? (
-              <Col md={8}>
-                <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
-              </Col>
-            )
-            : movies.map(movie => (
-              <Col md={4}>
-                <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }} />
-              </Col>
-            ))
-          }
         </Row>
       </div>
     );

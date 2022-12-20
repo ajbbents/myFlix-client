@@ -20,7 +20,7 @@ export function NavBar({ user }) {
   };
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="main-nav" sticky="top" bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
           Bingeable Films

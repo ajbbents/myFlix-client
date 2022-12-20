@@ -264,33 +264,3 @@ export class MainView extends React.Component {
 }
 
 export default MainView;
-
-
-{/* <div className="main-view">
-            <Navbar bg="light" expand="lg">
-              <Container fluid>
-                <Navbar.Brand href="#home">BingeableFilms</Navbar.Brand>
-                <Nav className="navLinks">
-                  <Nav.Link href="#home">Home</Nav.Link>
-                  <Nav.Link href="#movies">Movies</Nav.Link>
-                  <Nav.Link href="#users">Users</Nav.Link>
-                  <button onClick={() => { this.onLoggedOut() }}>Logout</button>
-                </Nav>
-              </Container>
-            </Navbar>
-
-            <Row className="justify-content-md-center">
-              {selectedMovie
-                ? (
-                  <Col md={8}>
-                    <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
-                  </Col>
-                )
-                : movies.map(movie => (
-                  <Col md={4}>
-                    <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }} />
-                  </Col>
-                ))
-              }
-            </Row>
-          </div> */}

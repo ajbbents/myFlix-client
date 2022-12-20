@@ -180,11 +180,44 @@ export class MainView extends React.Component {
           /> */}
 
           <Route
+            path={`/users/${user}`}
+            render={({ history }) => {
+              if (!user) return <Redirect to="/" />;
+              return (
+                <Col>
+                  <ProfileView
+                    user={user}
+                    goBack={history.goBack}
+                    favoriteMovies={favoriteMovies || []}
+                    handleFavorite={this.handleFavorite}
+                    onBackClick={() => history.goBack()}
+                  />
+                </Col>
+              );
+            }}
+          />
+
+          <Route
+            path={`/user-update/:username`}
+            render={({ match, history }) => {
+              if (!user) return <Redirect to="/" />;
+              return (
+                <Col>
+                  <UserUpdate
+                    user={user}
+                    onBackClick={() => history.goBack()}
+                  />
+                </Col>
+              );
+            }}
+          />
+
+          <Route
             path="/movies/:movieId"
             render={({ match, history }) => {
               if (!user)
                 return (
-                  <Col md={3} key={m._id}>
+                  <Col md={3}>
                     <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                   </Col>
                 );

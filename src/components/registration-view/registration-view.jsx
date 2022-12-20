@@ -46,7 +46,26 @@ export function RegistrationView(props) {
     console.log(username, password, email, birthday);
     /*send a request to the server for authentication
     then call props.onRegistration(username)*/
-    props.onRegistration(username);
+    const isReq = validate();
+    if (isReq) {
+      axios
+        .post("https://pickles2001.herokuapp.com/users", {
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday,
+        })
+        .then((response) => {
+          const data = response.data;
+          console.log(data);
+          alert("Registration successful! Please sign-in.");
+          window.open("/", "_self");
+        })
+        .catch((response) => {
+          console.error(response);
+          alert("Unable to register.");
+        });
+    }
   };
 
   return (

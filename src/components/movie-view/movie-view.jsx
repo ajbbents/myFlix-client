@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { Card, Button, Col } from "react-bootstrap";
 
 import { Link, Route } from "react-router-dom";
+import './movie-view.scss';
 
 export class MovieView extends React.Component {
 
@@ -19,7 +21,7 @@ export class MovieView extends React.Component {
   // }
 
   render() {
-    const { movie, onBackClick } = this.props;
+    const { movie, onClick, onBackClick, handleFavorite } = this.props;
 
     return (
 
@@ -55,7 +57,12 @@ export class MovieView extends React.Component {
                 <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
               </Col>
             }} /> */}
-            <button onClick={() => { onBackClick(null); }}>Back</button>
+            <Button
+              // className="favorite-button mt-2"
+              variant="primary"
+              onClick={() => { handleFavorite(movie._id, "add"); }} >Add to favorite movies
+            </Button>
+            <Button variant="secondary" onClick={() => { onBackClick(null); }}>Back</Button>
           </div>
 
         </Card.Body>

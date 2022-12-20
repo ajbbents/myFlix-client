@@ -6,14 +6,14 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import './main-view.scss';
 
-import { Container, Row, Col, Button, Navbar, Nav } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 import { RegistrationView } from "../registration-view/registration-view";
 import { LoginView } from "../login-view/login-view";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
-import { NavigationBar } from "../navigation-bar/navigation-bar";
-// import { ProfileView } from "../profile-view/profile-view";
+import { NavBar } from "../navigation-bar/navigation-bar";
+import { ProfileView } from "../profile-view/profile-view";
 
 export class MainView extends React.Component {
 
@@ -21,9 +21,10 @@ export class MainView extends React.Component {
     super();
     this.state = {
       movies: [],
-      // selectedMovie: null,
+      favoriteMovies: [],
+      selectedMovie: null,
       user: null,
-      register: null
+      registered: true,
     };
   }
 
@@ -63,9 +64,9 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
-  onRegistration(register) {
+  toRegister(registered) {
     this.setState({
-      register
+      registered,
     });
   }
 

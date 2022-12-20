@@ -71,54 +71,53 @@ export function RegistrationView(props) {
   return (
 
     <Container fluid className="registration-view">
-      <Navbar bg="light" expand="lg">
-        <Container fluid>
-          <Navbar.Brand href="#home">BingeableFilms</Navbar.Brand>
-          <Nav className="navLinks">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#movies">Movies</Nav.Link>
-            <Nav.Link href="#users">Users</Nav.Link>
-            <Nav.Link href="#logout">Logout</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+      <Row className="justify-content-md-center mt-5">
+        <Col md={5}>
+          <Form>
+            <Form.Group controlId="formUsername">
+              <Form.Label>Username:</Form.Label>
+              <Form.Control
+                type="text" placeholder="Create a username"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+              />
+              {usernameErr && <p>{usernameErr}</p>}
+            </Form.Group>
 
-      <Card style={{ width: "62rem", padding: '5rem' }}>
-        <Card.Body>
-          <Card.Title>Register</Card.Title>
-          <Card.Text>
+            <Form.Group controlId="formPassword">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control
+                type="password" placeholder="Password must be 6 characters"
+                minLength="6" value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+              {passwordErr && <p>{passwordErr}</p>}
+            </Form.Group>
 
-            <Form>
-              <Form.Group controlId="formUsername">
-                <Form.Label>Username:</Form.Label>
-                <Form.Control type="text" required placeholder="Create a username" onChange={e => setUsername(e.target.value)} />
-              </Form.Group>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Email address:</Form.Label>
+              <Form.Control
+                type="email" placeholder="Enter Email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+              {emailErr && <p>{emailErr}</p>}
+              <Form.Text className="text.muted">We'll never share your email with anyone. Pinky promise.</Form.Text>
+            </Form.Group>
 
-              <Form.Group controlId="formPassword">
-                <Form.Label>Password:</Form.Label>
-                <Form.Control type="password" required placeholder="Password must be 8 characters" onChange={e => setPassword(e.target.value)} />
-              </Form.Group>
+            <Form.Group controlId="formBirthday">
+              <Form.Label>Birthday:</Form.Label>
+              <Form.Control
+                type="Birthday" placeholder="MM/DD/YYYY"
+                value={birthday}
+                onChange={e => setBirthday(e.target.value)}
+              />
+            </Form.Group>
 
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address:</Form.Label>
-                <Form.Control type="email" required placeholder="Enter Email" onChange={e => setEmail(e.target.value)} />
-                <Form.Text className="text.muted">We'll never share your email with anyone. Pinky promise.</Form.Text>
-              </Form.Group>
-
-              <Form.Group controlId="formBirthday">
-                <Form.Label>Birthday:</Form.Label>
-                <Form.Control type="Birthday" required placeholder="MM/DD/YYYY" onChange={e => setBirthday(e.target.value)} />
-              </Form.Group>
-
-              <Button variant="primary" type="submit" onClick={handleSubmit}>Register</Button>
-            </Form>
-
-
-          </Card.Text>
-        </Card.Body>
-
-      </Card>
-
+            <Button variant="primary" type="submit" onClick={handleSubmit}>Register</Button>
+          </Form>
+        </Col>
+      </Row>
     </Container>
   );
 }

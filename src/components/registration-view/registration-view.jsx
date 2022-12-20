@@ -15,6 +15,31 @@ export function RegistrationView(props) {
   const [passwordErr, setPasswordErr] = useState("");
   const [emailErr, setEmailErr] = useState("");
 
+  const validate = () => {
+    let isReq = true;
+    if (!username) {
+      setUsernameErr("Username is required.");
+      isReq = false;
+    } else if (username.length < 2) {
+      setUsernameErr("Username must be 2 characters long.");
+      isReq = false;
+    }
+    if (!password) {
+      setPasswordErr("Password is required.");
+      isReq = false;
+    } else if (password.length < 6) {
+      setPasswordErr("Password must be 6 characters long.");
+      isReq = false;
+    }
+    if (!email) {
+      setEmailErr("Email is required.");
+      isReq = false;
+    } else if (email.indexOf("@") === -1) {
+      setEmailErr("Email is invalid.");
+      isReq = false;
+    }
+    return isReq;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();

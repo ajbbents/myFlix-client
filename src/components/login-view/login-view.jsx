@@ -67,42 +67,37 @@ export function LoginView(props) {
 
   return (
     <Container className="login-view">
-      <Card className="text-center" style={{ width: '25rem', padding: '2rem' }}>
-        <Card.Body>
-          <Card.Title>Login</Card.Title>
-          <Card.Text>
+      <Row className="justify-content-center m-2">
 
-            <Form>
-              <Form.Group controlId="formUsername">
-                <Form.Label>Username:</Form.Label>
-                <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
-                {/*code here to display validation error*/}
-                {usernameErr && <p>{usernameErr}</p>}
-              </Form.Group>
+        <Form>
+          <Form.Group controlId="formUsername">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
+            {/*code here to display validation error*/}
+            {usernameErr && <p>{usernameErr}</p>}
+          </Form.Group>
 
-              <Form.Group controlId="formPassword">
-                <Form.Label>Password:</Form.Label>
-                <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
-                {/*code here to display validation error*/}
-                {passwordErr && <p>{passwordErr}</p>}
-              </Form.Group>
+          <Form.Group controlId="formPassword">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
+            {/*code here to display validation error*/}
+            {passwordErr && <p>{passwordErr}</p>}
+          </Form.Group>
 
-              <Button variant="primary" type="submit" onClick={handleSubmit}>
-                Submit
-              </Button>
-              <Button variant="secondary" type="button" onClick={RegistrationView}>
-                Not registered yet?
-              </Button>
-            </Form>
+          <Button variant="primary" type="submit" onClick={handleSubmit}>
+            Submit
+          </Button>
+          <Button variant="secondary" type="button" onClick={handleRegisterClick}>
+            Not registered yet?
+          </Button>
+        </Form>
 
-          </Card.Text>
-        </Card.Body>
-
-      </Card>
+      </Row>
     </Container>
   );
 }
 
 LoginView.propTypes = {
   onLoggedIn: PropTypes.func.isRequired,
+  // toRegister: PropTypes.func.isRequired,
 };

@@ -124,36 +124,32 @@ export class MainView extends React.Component {
   };
 
   render() {
-    const { movies, selectedMovie, user, register, authData } = this.state;
+    const { movies, selectedMovie, user, registered, authData, favoriteMovies } = this.state;
 
     // if (!register) return (<RegistrationView onRegistration={(register) => this.onRegistration(register)} />)
 
     return (
       <Router>
-        <NavigationBar
+        <NavBar
           user={user}
-          onLoggedOut={() => {
-            setUser(null);
-          }}
         />
 
-        <Row className="main-view justify-content-md-center">
+        <Row className="main-view justify-content-md-center mt-3">
 
           <Route exact path="/"
             render={() => {
               if (!user)
                 return (
                   <Col>
-                    <LoginView movies={movies} onLoggedIn={(user) => this.onLoggedIn(user)} />
+                    <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                   </Col>
                 );
               if (movies.length === 0) return <div className="main-view" />;
-              return <MovieView movies={movies} />
-              // return movies.map(m => (
-              //   <Col md={3} key={m._id}>
-              //     <MovieCard movie={m} />
-              //   </Col>
-              // ));
+              return movies.map(m => (
+                <Col md={3} key={m._id}>
+                  <MovieCard movie={m} />
+                </Col>
+              ));
             }}
           />
 

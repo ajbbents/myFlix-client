@@ -59,6 +59,12 @@ export function LoginView(props) {
     }
   };
 
+  const handleRegisterClick = (e) => {
+    e.preventDefault();
+    console.log("clicked register")
+    props.toRegister();
+  };
+
   return (
     <Container className="login-view">
       <Card className="text-center" style={{ width: '25rem', padding: '2rem' }}>

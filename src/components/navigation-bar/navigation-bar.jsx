@@ -1,7 +1,24 @@
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import React from "react";
+import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export function NavBar({ user }) {
+  const onLoggedOut = () => {
+    localStorage.clear();
+    window.open("/", "_self");
+  };
+
+  const isAuth = () => {
+    if (typeof window == "undefined") {
+      return false;
+    }
+    if (localStorage.getItem("token")) {
+      return localStorage.getItem("token");
+    } else {
+      return false;
+    }
+  };
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -11,18 +28,12 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            {!user && (
-              <>
-                <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                <Nav.Link as={Link} to="/register">Register</Nav.Link>
-              </>
+            {isAuth() && <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>}
+            {isAuth() && (
+              <Button variant="link" onClick={onLoggedOut}>Logout</Button>
             )}
-            {user && (
-              <>
-                <Nav.Link as={Link} to="/">Home</Nav.Link>
-                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
-              </>
-            )}
+            {!isAuth() && <Nav.Link href="/">Sign-in</Nav.Link>}
+            {!isAuth() && <Nav.Link href="/register">Register</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Container>

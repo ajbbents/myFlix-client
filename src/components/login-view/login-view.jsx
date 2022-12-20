@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import { RegistrationView } from "../registration-view/registration-view";
-import { Card, Form, Button, Container } from 'react-bootstrap';
+import { Row, Card, Form, Button, Container } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 import './login-view.scss';
 
@@ -17,21 +18,24 @@ export function LoginView(props) {
   //validate user inputs
   const validate = () => {
     let isReq = true;
+
+    setUsernameErr("");
+    setPasswordErr("");
+
     if (!username) {
-      setUsernameErr('You have to have a username');
+      setUsernameErr('You have to have a username.');
       isReq = false;
     } else if (username.length < 2) {
       setUsernameErr('Username must be at least 2 characters long');
       isReq = false;
     }
     if (!password) {
-      setPasswordErr('You have to have a password');
+      setPasswordErr('You have to have a password.');
       isReq = false;
     } else if (password.length < 6) {
       setPasswordErr('Password must be at least 6 characters long');
       isReq = false;
     }
-
     return isReq;
   }
 
@@ -47,6 +51,7 @@ export function LoginView(props) {
         .then(response => {
           const data = response.data;
           props.onLoggedIn(data);
+          console.log('its working');
         })
         .catch(e => {
           console.log('no such user')

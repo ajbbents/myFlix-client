@@ -78,6 +78,51 @@ export class MainView extends React.Component {
     });
   }
 
+  handleFavorite = (movieId, action) => {
+    const { user, favoriteMovies } = this.state;
+    const accessToken = localStorage.getItem("token");
+    const username = user;
+    if (accessToken !== null && username !== null) {
+      //add movieid to favorites
+      if (action === "add") {
+        this.setState({ favoriteMovies: [...favoriteMovies, movieId] });
+        axios
+          .put(
+            `https://pickles2001.herokuapp.com/users/${username}/movies/${movieId}`,
+            {},
+            {
+              headers: { Authorization: `Bearer ${accessToken}` },
+            }
+          )
+          .then((res) => {
+            console.log(`movie added to ${username}'s favorite movies.`);
+            alert(`Movie added to ${username}'s favorite movies.`);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+      } else if (action === "remove") {
+        this.setState({
+          favoriteMovies: favoriteMovies.filter((id) => id !== movieId),
+        });
+        axios
+          .delete(
+            `https://pickles2001.herokuapp.com/users/${username}/favorites/${movieId}`,
+            {
+              headers: { Authorization: `Bearer ${accessToken}` },
+            }
+          )
+          .then((res) => {
+            console.log(`Movie removed from ${username}'s favorite movies.`);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
+  };
+
   render() {
     const { movies, selectedMovie, user, register, authData } = this.state;
 

@@ -12,6 +12,12 @@ html, body, .app-container {
   color: #43464b;
 }
 
+.main-nav {
+  font-family: Georgia;
+}
+
+
+
 
 
 .login-view {

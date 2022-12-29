@@ -51,7 +51,8 @@ export function LoginView(props) {
         .then(response => {
           const data = response.data;
           props.onLoggedIn(data);
-          console.log('its working');
+          // console.log('its working');
+          window.open("/", "_self");
         })
         .catch(e => {
           console.log('no such user')
@@ -85,7 +86,7 @@ export function LoginView(props) {
           </Form.Group>
 
           <Button variant="primary" type="submit" onClick={handleSubmit}>
-            Submit
+            Login
           </Button>
           <Button variant="secondary" type="button" href={"/register"}>
             Not registered yet?

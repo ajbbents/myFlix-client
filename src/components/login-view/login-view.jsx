@@ -62,7 +62,7 @@ export function LoginView(props) {
   const handleRegisterClick = (e) => {
     e.preventDefault();
     console.log("clicked register")
-    props.toRegister();
+    props.toRegister(false);
   };
 
   return (
@@ -87,7 +87,7 @@ export function LoginView(props) {
           <Button variant="primary" type="submit" onClick={handleSubmit}>
             Submit
           </Button>
-          <Button variant="secondary" type="button" onClick={handleRegisterClick}>
+          <Button variant="secondary" type="button" href={"/register"}>
             Not registered yet?
           </Button>
         </Form>

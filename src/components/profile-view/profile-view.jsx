@@ -5,11 +5,11 @@ import { Card, Button, Col, Row, Container, Form, Figure } from "react-bootstrap
 import { Link, Route } from "react-router-dom";
 import axios from "axios";
 
-export default class ProfileView extends React.Component {
+export class ProfileView extends React.Component {
   constructor() {
     super();
     this.state = {
-      Username: null,
+      UserName: null,
       Password: null,
       Email: null,
       Birthday: null,
@@ -28,8 +28,8 @@ export default class ProfileView extends React.Component {
     console.log(movie)
     axios
       .delete(
-        `https://pickles2001.herokuapp.com/users/${Username}/movies/${movie}`,
-        { headers: { Authorization: `Bearer ${token}}` } }
+        `https://pickles2001.herokuapp.com/users/${UserName}/movies/${movie}`,
+        { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((response) => {
         console.log(response);
@@ -39,7 +39,7 @@ export default class ProfileView extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-  };
+  }
 
   onLoggedOut() {
     localStorage.removeItem("token");
@@ -51,14 +51,14 @@ export default class ProfileView extends React.Component {
   }
 
   getUser = (token) => {
-    const Username = localStorage.getItem("user");
+    const UserName = localStorage.getItem("user");
     axios
-      .get(`https://pickles2001.herokuapp.com/users/${Username}`, {
+      .get(`https://pickles2001.herokuapp.com/users/${UserName}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         this.setState({
-          Username: response.data.Username,
+          UserName: response.data.UserName,
           Password: response.data.Password,
           Email: response.data.Email,
           Birthday: response.data.Birthday,
@@ -68,50 +68,51 @@ export default class ProfileView extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-  };
+  }
 
   editUser = (e) => {
     e.preventDefault();
-    const Username = localStorage.getItem("user");
+    const UserName = localStorage.getItem("user");
     const token = localStorage.getItem("token");
     axios
-      .put(`https://pickles2001.herokuapp.com/users/${Username}`,
+      .put(`https://pickles2001.herokuapp.com/users/${UserName}`,
         {
-          Username: this.state.Username,
+          UserName: this.state.UserName,
           Password: this.state.Password,
           Email: this.state.Email,
           Birthday: this.state.Birthday,
         },
         {
           headers: { Authorization: `Bearer ${token}` },
-        })
+        }
+      )
       .then((response) => {
         console.log(response)
         this.setState({
-          Username: response.data.Username,
+          UserName: response.data.UserName,
           Password: response.data.Password,
           Email: response.data.Email,
           Birthday: response.data.Birthday,
         });
 
-        localStorage.setItem("user", this.state.Username);
+        localStorage.setItem("user", this.state.UserName);
         const data = response.data;
         console.log(data);
-        console.log(this.state.Username);
+        console.log(this.state.UserName);
         alert("Profile has been updated.");
-        window.open(`/users/&{Username}`, "_self");
+        window.open(`/users/&{UserName}`, "_self");
       })
       .catch(function (error) {
         console.error(error);
       });
-  };
+  }
 
   onDeleteUser() {
-    const Username = localStorage.getItem("user");
+    const UserName = localStorage.getItem("user");
     const token = localStorage.getItem("token");
 
     axios
-      .delete(`https://pickles2001.herokuapp.com/users/${Username}`, {
+      .delete(`https://pickles2001.herokuapp.com/users/${UserName}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -128,9 +129,9 @@ export default class ProfileView extends React.Component {
 
   setUsername(value) {
     this.setState({
-      Username: value,
+      UserName: value,
     });
-    this.Username = value;
+    this.UserName = value;
   }
 
   setPassword(value) {
@@ -153,13 +154,14 @@ export default class ProfileView extends React.Component {
     });
     this.Birthday = value;
   }
+
   test() {
     alert("works")
   }
 
   render() {
     const { movies } = this.props;
-    const { FavoriteMovies, Username, Password, Email, Birthday } = this.state;
+    const { FavoriteMovies, UserName, Password, Email, Birthday } = this.state;
     const myFavoriteMovies = [];
     for (let index = 0; index < movies.length; index++) {
       const movie = movies[index];
@@ -172,6 +174,18 @@ export default class ProfileView extends React.Component {
       <Container>
         <Row>
           <Col>
+            <Card className="user-profile">
+              <Card.Header>User Profile</Card.Header>
+              <Card.Body>
+                <>
+                  <p>Name: {UserName}</p>
+                  <p>Email: {Email}</p>
+                  <p>Birthday: {Birthday}</p>
+                </>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col>
             <Card className="update-inputs">
               <Card.Header>Update Profile</Card.Header>
               <Card.Body>
@@ -180,7 +194,7 @@ export default class ProfileView extends React.Component {
                     onSubmit={(e) =>
                       this.editUser(
                         e,
-                        this.Username,
+                        this.UserName,
                         this.Password,
                         this.Email,
                         this.Birthday
@@ -193,14 +207,24 @@ export default class ProfileView extends React.Component {
                         type="text"
                         name="Username"
                         placeholder="New Username"
-                        onChange={(e) => this.setUsername(e.target.value)}
+                        onChange={(e) => this.setUserName(e.target.value)}
+                        required
+                      />
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Label>Password</Form.Label>
+                      <Form.Control
+                        type="password"
+                        name="Password"
+                        placeholder="New Password"
+                        onChange={(e) => this.setPassword(e.target.value)}
                         required
                       />
                     </Form.Group>
                     <Form.Group>
                       <Form.Label>Email</Form.Label>
                       <Form.Control
-                        type="text"
+                        type="email"
                         name="Email"
                         placeholder="New Email"
                         onChange={(e) => this.setEmail(e.target.value)}
@@ -233,6 +257,7 @@ export default class ProfileView extends React.Component {
             </Card>
           </Col>
         </Row>
+
         <Card className="favmov-inputs">
           <Card.Body>
             <Row>

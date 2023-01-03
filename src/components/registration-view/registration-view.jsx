@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import { Container, Row, Col, Form, Card, Navbar, Nav, Button } from 'react-bootstrap';
-
 import './registration-view.scss';
-import axios from 'axios';
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState("");
@@ -50,7 +50,7 @@ export function RegistrationView(props) {
     if (isReq) {
       axios
         .post("https://pickles2001.herokuapp.com/users", {
-          Username: username,
+          UserName: username,
           Password: password,
           Email: email,
           Birthday: birthday,
@@ -61,10 +61,14 @@ export function RegistrationView(props) {
           alert("Registration successful! Please sign-in.");
           window.open("/", "_self");
         })
-        .catch((response) => {
-          console.error(response);
-          alert("Unable to register.");
+        .catch(err => {
+          console.log(err.response.data);
+          alert("unable to register you freaking fool");
         });
+      // .catch((response) => {
+      //   console.error(response);
+      //   alert("Unable to register.....");
+      // });
     }
   };
 

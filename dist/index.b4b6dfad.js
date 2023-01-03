@@ -27418,6 +27418,7 @@ parcelHelpers.export(exports, "isAxiosError", ()=>isAxiosError);
 parcelHelpers.export(exports, "spread", ()=>spread);
 parcelHelpers.export(exports, "toFormData", ()=>toFormData);
 parcelHelpers.export(exports, "AxiosHeaders", ()=>AxiosHeaders);
+parcelHelpers.export(exports, "HttpStatusCode", ()=>HttpStatusCode);
 parcelHelpers.export(exports, "formToJSON", ()=>formToJSON);
 parcelHelpers.export(exports, "mergeConfig", ()=>mergeConfig);
 var _axiosJs = require("./lib/axios.js");
@@ -27425,7 +27426,7 @@ var _axiosJsDefault = parcelHelpers.interopDefault(_axiosJs);
 // This module is intended to unwrap Axios default export as named.
 // Keep top-level export same with static properties
 // so that it can keep same with es module or cjs
-const { Axios , AxiosError , CanceledError , isCancel , CancelToken , VERSION , all , Cancel , isAxiosError , spread , toFormData , AxiosHeaders , formToJSON , mergeConfig  } = (0, _axiosJsDefault.default);
+const { Axios , AxiosError , CanceledError , isCancel , CancelToken , VERSION , all , Cancel , isAxiosError , spread , toFormData , AxiosHeaders , HttpStatusCode , formToJSON , mergeConfig  } = (0, _axiosJsDefault.default);
 
 },{"./lib/axios.js":"63MyY","@parcel/transformer-js/src/esmodule-helpers.js":"1PY87"}],"63MyY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -27459,6 +27460,8 @@ var _isAxiosErrorJs = require("./helpers/isAxiosError.js");
 var _isAxiosErrorJsDefault = parcelHelpers.interopDefault(_isAxiosErrorJs);
 var _axiosHeadersJs = require("./core/AxiosHeaders.js");
 var _axiosHeadersJsDefault = parcelHelpers.interopDefault(_axiosHeadersJs);
+var _httpStatusCodeJs = require("./helpers/HttpStatusCode.js");
+var _httpStatusCodeJsDefault = parcelHelpers.interopDefault(_httpStatusCodeJs);
 "use strict";
 /**
  * Create an instance of Axios
@@ -27508,11 +27511,12 @@ axios.isAxiosError = (0, _isAxiosErrorJsDefault.default);
 axios.mergeConfig = (0, _mergeConfigJsDefault.default);
 axios.AxiosHeaders = (0, _axiosHeadersJsDefault.default);
 axios.formToJSON = (thing)=>(0, _formDataToJSONJsDefault.default)((0, _utilsJsDefault.default).isHTMLForm(thing) ? new FormData(thing) : thing);
+axios.HttpStatusCode = (0, _httpStatusCodeJsDefault.default);
 axios.default = axios;
 // this module should only have a default export
 exports.default = axios;
 
-},{"./utils.js":"5By4s","./helpers/bind.js":"haRQb","./core/Axios.js":"cpqD8","./core/mergeConfig.js":"b85oP","./defaults/index.js":"hXfHM","./helpers/formDataToJSON.js":"01RfH","./cancel/CanceledError.js":"9PwCG","./cancel/CancelToken.js":"45wzn","./cancel/isCancel.js":"a0VmF","./env/data.js":"h29L9","./helpers/toFormData.js":"ajoez","./core/AxiosError.js":"3u8Tl","./helpers/spread.js":"dyQ8N","./helpers/isAxiosError.js":"eyiLq","./core/AxiosHeaders.js":"cgSSx","@parcel/transformer-js/src/esmodule-helpers.js":"1PY87"}],"5By4s":[function(require,module,exports) {
+},{"./utils.js":"5By4s","./helpers/bind.js":"haRQb","./core/Axios.js":"cpqD8","./core/mergeConfig.js":"b85oP","./defaults/index.js":"hXfHM","./helpers/formDataToJSON.js":"01RfH","./cancel/CanceledError.js":"9PwCG","./cancel/CancelToken.js":"45wzn","./cancel/isCancel.js":"a0VmF","./env/data.js":"h29L9","./helpers/toFormData.js":"ajoez","./core/AxiosError.js":"3u8Tl","./helpers/spread.js":"dyQ8N","./helpers/isAxiosError.js":"eyiLq","./core/AxiosHeaders.js":"cgSSx","./helpers/HttpStatusCode.js":"fdR61","@parcel/transformer-js/src/esmodule-helpers.js":"1PY87"}],"5By4s":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _bindJs = require("./helpers/bind.js");
@@ -27723,7 +27727,10 @@ function findKey(obj, key) {
     }
     return null;
 }
-const _global = typeof self === "undefined" ? typeof global === "undefined" ? undefined : global : self;
+const _global = (()=>{
+    /*eslint no-undef:0*/ if (typeof globalThis !== "undefined") return globalThis;
+    return typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : global;
+})();
 const isContextDefined = (context)=>!isUndefined(context) && context !== _global;
 /**
  * Accepts varargs expecting each argument to be an object, then
@@ -30549,7 +30556,8 @@ var _formDataJsDefault = parcelHelpers.interopDefault(_formDataJs);
  * `typeof window !== 'undefined' && typeof document !== 'undefined'`.
  * This leads to a problem when axios post `FormData` in webWorker
  */ const isStandardBrowserWebWorkerEnv = (()=>{
-    return typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope && typeof self.importScripts === "function";
+    return typeof WorkerGlobalScope !== "undefined" && // eslint-disable-next-line no-undef
+    self instanceof WorkerGlobalScope && typeof self.importScripts === "function";
 })();
 exports.default = {
     isBrowser: true,
@@ -31527,7 +31535,7 @@ exports.default = {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "VERSION", ()=>VERSION);
-const VERSION = "1.2.1";
+const VERSION = "1.2.2";
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"1PY87"}],"45wzn":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -31638,7 +31646,80 @@ function isAxiosError(payload) {
 }
 exports.default = isAxiosError;
 
-},{"./../utils.js":"5By4s","@parcel/transformer-js/src/esmodule-helpers.js":"1PY87"}],"7wKI2":[function(require,module,exports) {
+},{"./../utils.js":"5By4s","@parcel/transformer-js/src/esmodule-helpers.js":"1PY87"}],"fdR61":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const HttpStatusCode = {
+    Continue: 100,
+    SwitchingProtocols: 101,
+    Processing: 102,
+    EarlyHints: 103,
+    Ok: 200,
+    Created: 201,
+    Accepted: 202,
+    NonAuthoritativeInformation: 203,
+    NoContent: 204,
+    ResetContent: 205,
+    PartialContent: 206,
+    MultiStatus: 207,
+    AlreadyReported: 208,
+    ImUsed: 226,
+    MultipleChoices: 300,
+    MovedPermanently: 301,
+    Found: 302,
+    SeeOther: 303,
+    NotModified: 304,
+    UseProxy: 305,
+    Unused: 306,
+    TemporaryRedirect: 307,
+    PermanentRedirect: 308,
+    BadRequest: 400,
+    Unauthorized: 401,
+    PaymentRequired: 402,
+    Forbidden: 403,
+    NotFound: 404,
+    MethodNotAllowed: 405,
+    NotAcceptable: 406,
+    ProxyAuthenticationRequired: 407,
+    RequestTimeout: 408,
+    Conflict: 409,
+    Gone: 410,
+    LengthRequired: 411,
+    PreconditionFailed: 412,
+    PayloadTooLarge: 413,
+    UriTooLong: 414,
+    UnsupportedMediaType: 415,
+    RangeNotSatisfiable: 416,
+    ExpectationFailed: 417,
+    ImATeapot: 418,
+    MisdirectedRequest: 421,
+    UnprocessableEntity: 422,
+    Locked: 423,
+    FailedDependency: 424,
+    TooEarly: 425,
+    UpgradeRequired: 426,
+    PreconditionRequired: 428,
+    TooManyRequests: 429,
+    RequestHeaderFieldsTooLarge: 431,
+    UnavailableForLegalReasons: 451,
+    InternalServerError: 500,
+    NotImplemented: 501,
+    BadGateway: 502,
+    ServiceUnavailable: 503,
+    GatewayTimeout: 504,
+    HttpVersionNotSupported: 505,
+    VariantAlsoNegotiates: 506,
+    InsufficientStorage: 507,
+    LoopDetected: 508,
+    NotExtended: 510,
+    NetworkAuthenticationRequired: 511
+};
+Object.entries(HttpStatusCode).forEach(([key, value])=>{
+    HttpStatusCode[value] = key;
+});
+exports.default = HttpStatusCode;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"1PY87"}],"7wKI2":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -41201,7 +41282,7 @@ var _reactRouterDom = require("react-router-dom");
 var _movieCardScss = require("./movie-card.scss");
 class MovieCard extends (0, _reactDefault.default).Component {
     render() {
-        const { movie  } = this.props;
+        const { movie , handleFavorite  } = this.props;
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Img, {

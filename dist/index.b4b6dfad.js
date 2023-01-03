@@ -41619,7 +41619,7 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 var _navigationBarScss = require("./navigation-bar.scss");
-function NavBar({ username  }) {
+function NavBar({ UserName  }) {
     const onLoggedOut = ()=>{
         localStorage.clear();
         window.open("/", "_self");
@@ -41658,7 +41658,7 @@ function NavBar({ username  }) {
                         className: "me-auto",
                         children: [
                             isAuth() && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
-                                href: `/users/${username}`,
+                                href: `/users/${UserName}`,
                                 children: "Profile"
                             }, void 0, false, {
                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
@@ -41802,8 +41802,8 @@ class ProfileView extends (0, _reactDefault.default).Component {
         e.preventDefault();
         const UserName1 = localStorage.getItem("user");
         const token = localStorage.getItem("token");
-        (0, _axiosDefault.default).put(`https://pickles2001.herokuapp.com/users/${Username}`, {
-            UserName: this.state.Username,
+        (0, _axiosDefault.default).put(`https://pickles2001.herokuapp.com/users/${UserName1}`, {
+            UserName: this.state.UserName,
             Password: this.state.Password,
             Email: this.state.Email,
             Birthday: this.state.Birthday

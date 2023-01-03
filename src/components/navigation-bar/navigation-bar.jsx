@@ -1,8 +1,9 @@
 import React from "react";
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "./navigation-bar.scss";
 
-export function NavBar({ user }) {
+export function NavBar({ UserName }) {
   const onLoggedOut = () => {
     localStorage.clear();
     window.open("/", "_self");
@@ -28,7 +29,7 @@ export function NavBar({ user }) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            {isAuth() && <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>}
+            {isAuth() && <Nav.Link href={`/users/${UserName}`}>Profile</Nav.Link>}
             {isAuth() && (
               <Button variant="link" onClick={onLoggedOut}>Logout</Button>
             )}

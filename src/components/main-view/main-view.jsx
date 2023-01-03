@@ -15,7 +15,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { NavBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
 
-export class MainView extends React.Component {
+export default class MainView extends React.Component {
 
   constructor() {
     super();
@@ -23,7 +23,7 @@ export class MainView extends React.Component {
       movies: [],
       favoriteMovies: [],
       selectedMovie: null,
-      user: null,
+      username: null,
       registered: true,
     };
   }
@@ -64,7 +64,7 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
-  toRegister(registered) {
+  RegistrationView(registered) {
     this.setState({
       registered,
     });
@@ -263,4 +263,3 @@ export class MainView extends React.Component {
   }
 }
 
-export default MainView;

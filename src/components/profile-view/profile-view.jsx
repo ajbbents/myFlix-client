@@ -22,8 +22,28 @@ export class ProfileView extends React.Component {
     this.getUser(accessToken);
   }
 
+  getUser = (token) => {
+    const UserName = localStorage.getItem("user");
+    axios
+      .get(`https://pickles2001.herokuapp.com/users/${UserName}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        this.setState({
+          UserName: response.data.UserName,
+          Password: response.data.Password,
+          Email: response.data.Email,
+          Birthday: response.data.Birthday,
+          FavoriteMovies: response.data.FavoriteMovies,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   onRemoveFavorite = (movie) => {
-    const username = localStorage.getItem("user");
+    const UserName = localStorage.getItem("user");
     const token = localStorage.getItem("token");
     console.log(movie)
     axios
@@ -48,26 +68,6 @@ export class ProfileView extends React.Component {
       user: null,
     });
     window.open("/", "_self");
-  }
-
-  getUser = (token) => {
-    const UserName = localStorage.getItem("user");
-    axios
-      .get(`https://pickles2001.herokuapp.com/users/${UserName}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        this.setState({
-          UserName: response.data.UserName,
-          Password: response.data.Password,
-          Email: response.data.Email,
-          Birthday: response.data.Birthday,
-          FavoriteMovies: response.data.FavoriteMovies,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   editUser = (e) => {
@@ -160,15 +160,19 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { movies } = this.props;
+    const { movies, user } = this.props;
     const { FavoriteMovies, UserName, Password, Email, Birthday } = this.state;
-    const myFavoriteMovies = [];
-    for (let index = 0; index < movies.length; index++) {
-      const movie = movies[index];
-      if (FavoriteMovies.includes(movie._id)) {
-        myFavoriteMovies.push(movie);
-      }
-    }
+
+    const myFavoriteMovies = FavoriteMovies.map((movieId) =>
+      movie.find((movie) => movie._id === movieId)
+    );
+    // const myFavoriteMovies = [];
+    // for (let index = 0; index < movies.length; index++) {
+    //   const movie = movies[index];
+    //   if (FavoriteMovies.includes(movie._id)) {
+    //     myFavoriteMovies.push(movie);
+    //   }
+    // }
 
     return (
       <Container>

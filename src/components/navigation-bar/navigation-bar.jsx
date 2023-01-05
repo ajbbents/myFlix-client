@@ -3,7 +3,9 @@ import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./navigation-bar.scss";
 
-export function NavBar({ UserName }) {
+export function NavBar() {
+  let UserName = localStorage.getItem("user");
+
   const onLoggedOut = () => {
     localStorage.clear();
     window.open("/", "_self");

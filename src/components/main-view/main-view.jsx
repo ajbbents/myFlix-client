@@ -23,7 +23,7 @@ export default class MainView extends React.Component {
       movies: [],
       favoriteMovies: [],
       selectedMovie: null,
-      username: null,
+      UserName: null,
       registered: true,
     };
   }
@@ -56,11 +56,12 @@ export default class MainView extends React.Component {
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
-      user: authData.user.Username
+      user: authData.user.UserName
     });
 
     localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
+    localStorage.setItem('user', authData.user.UserName);
+
     this.getMovies(authData.token);
   }
 
@@ -79,24 +80,24 @@ export default class MainView extends React.Component {
   }
 
   handleFavorite = (movieId, action) => {
-    const { user, favoriteMovies } = this.state;
+    const { user, favoriteMovies, movies } = this.state;
     const accessToken = localStorage.getItem("token");
-    const username = user;
-    if (accessToken !== null && username !== null) {
+    const UserName = user;
+    if (accessToken !== null && UserName !== null) {
       //add movieid to favorites
       if (action === "add") {
         this.setState({ favoriteMovies: [...favoriteMovies, movieId] });
         axios
           .put(
-            `https://pickles2001.herokuapp.com/users/${username}/movies/${movieId}`,
+            `https://pickles2001.herokuapp.com/users/${UserName}/movies/${movieId}`,
             {},
             {
               headers: { Authorization: `Bearer ${accessToken}` },
             }
           )
           .then((res) => {
-            console.log(`movie added to ${username}'s favorite movies.`);
-            alert(`Movie added to ${username}'s favorite movies.`);
+            console.log(`movie added to ${UserName}'s favorite movies.`);
+            alert(`Movie added to ${UserName}'s favorite movies.`);
           })
           .catch((err) => {
             console.log(err);
@@ -108,13 +109,13 @@ export default class MainView extends React.Component {
         });
         axios
           .delete(
-            `https://pickles2001.herokuapp.com/users/${username}/favorites/${movieId}`,
+            `https://pickles2001.herokuapp.com/users/${UserName}/favorites/${movieId}`,
             {
               headers: { Authorization: `Bearer ${accessToken}` },
             }
           )
           .then((res) => {
-            console.log(`Movie removed from ${username}'s favorite movies.`);
+            console.log(`Movie removed from ${UserName}'s favorite movies.`);
           })
           .catch((err) => {
             console.log(err);
@@ -124,7 +125,7 @@ export default class MainView extends React.Component {
   };
 
   render() {
-    const { movies, selectedMovie, user, registered, authData, favoriteMovies } = this.state;
+    const { movies, selectedMovie, user, registered, authData, favoriteMovies, handleFavorite } = this.state;
 
     // if (!register) return (<RegistrationView onRegistration={(register) => this.onRegistration(register)} />)
 

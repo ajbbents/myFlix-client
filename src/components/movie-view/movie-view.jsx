@@ -8,6 +8,25 @@ import './movie-view.scss';
 
 export class MovieView extends React.Component {
 
+  handleFavorite(e) {
+    const { movie } = this.props;
+    const UserName = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    e.preventDefault();
+    axios
+      .post(
+        `https://pickles2001.herokuapp.com/users/${UserName}/movies/${movie._id}`,
+        { UserName: localStorage.getItem("user") },
+        { headers: { Authorization: `Bearer ${token}` }, }
+      )
+      .then((response) => {
+        console.log(response);
+        alert("You did it!");
+      })
+      .catch((error) => console.error(error));
+  }
+
   // keypressCallback(event) {
   //   console.log(event.key);
   // }
@@ -60,7 +79,7 @@ export class MovieView extends React.Component {
             <Button
               // className="favorite-button mt-2"
               variant="primary"
-              onClick={() => { handleFavorite(movie._id, "add"); }} >Add to favorite movies
+              onClick={(e) => this.handleFavorite(e)} >Add to favorites
             </Button>
             <Button variant="secondary" onClick={() => { onBackClick(null); }}>Back</Button>
           </div>
@@ -73,6 +92,7 @@ export class MovieView extends React.Component {
 
 MovieView.propTypes = {
   movie: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     Title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,

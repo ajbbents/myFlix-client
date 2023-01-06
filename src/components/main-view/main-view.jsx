@@ -79,50 +79,50 @@ export default class MainView extends React.Component {
     });
   }
 
-  handleFavorite = (movieId, action) => {
-    const { user, favoriteMovies, movies } = this.state;
-    const accessToken = localStorage.getItem("token");
-    const UserName = user;
-    if (accessToken !== null && UserName !== null) {
-      //add movieid to favorites
-      if (action === "add") {
-        this.setState({ favoriteMovies: [...favoriteMovies, movieId] });
-        axios
-          .put(
-            `https://pickles2001.herokuapp.com/users/${UserName}/movies/${movieId}`,
-            {},
-            {
-              headers: { Authorization: `Bearer ${accessToken}` },
-            }
-          )
-          .then((res) => {
-            console.log(`movie added to ${UserName}'s favorite movies.`);
-            alert(`Movie added to ${UserName}'s favorite movies.`);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+  // handleFavorite = (movieId, action) => {
+  //   const { user, favoriteMovies, movies } = this.state;
+  //   const accessToken = localStorage.getItem("token");
+  //   const UserName = user;
+  //   if (accessToken !== null && UserName !== null) {
+  //     //add movieid to favorites
+  //     if (action === "add") {
+  //       this.setState({ favoriteMovies: [...favoriteMovies, movieId] });
+  //       axios
+  //         .put(
+  //           `https://pickles2001.herokuapp.com/users/${UserName}/movies/${movieId}`,
+  //           {},
+  //           {
+  //             headers: { Authorization: `Bearer ${accessToken}` },
+  //           }
+  //         )
+  //         .then((res) => {
+  //           console.log(`movie added to ${UserName}'s favorite movies.`);
+  //           alert(`Movie added to ${UserName}'s favorite movies.`);
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //         });
 
-      } else if (action === "remove") {
-        this.setState({
-          favoriteMovies: favoriteMovies.filter((id) => id !== movieId),
-        });
-        axios
-          .delete(
-            `https://pickles2001.herokuapp.com/users/${UserName}/favorites/${movieId}`,
-            {
-              headers: { Authorization: `Bearer ${accessToken}` },
-            }
-          )
-          .then((res) => {
-            console.log(`Movie removed from ${UserName}'s favorite movies.`);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    }
-  };
+  //     } else if (action === "remove") {
+  //       this.setState({
+  //         favoriteMovies: favoriteMovies.filter((id) => id !== movieId),
+  //       });
+  //       axios
+  //         .delete(
+  //           `https://pickles2001.herokuapp.com/users/${UserName}/favorites/${movieId}`,
+  //           {
+  //             headers: { Authorization: `Bearer ${accessToken}` },
+  //           }
+  //         )
+  //         .then((res) => {
+  //           console.log(`Movie removed from ${UserName}'s favorite movies.`);
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //         });
+  //     }
+  //   }
+  // };
 
   render() {
     const { movies, selectedMovie, user, registered, authData, favoriteMovies, handleFavorite } = this.state;

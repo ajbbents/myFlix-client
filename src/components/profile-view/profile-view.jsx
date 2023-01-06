@@ -163,9 +163,12 @@ export class ProfileView extends React.Component {
     const { movies, user } = this.props;
     const { FavoriteMovies, UserName, Password, Email, Birthday } = this.state;
 
-    const myFavoriteMovies = FavoriteMovies.map((movieId) =>
-      movie.find((movie) => movie._id === movieId)
-    );
+    // const myFavoriteMovies = FavoriteMovies.map((movieId) =>
+    //   movies.find((movie) => movie._id === movieId)
+    // );
+
+    const myFavoriteMovies = this.props.movies.filter(movie => FavoriteMovies.includes(movie._id));
+
     // const myFavoriteMovies = [];
     // for (let index = 0; index < movies.length; index++) {
     //   const movie = movies[index];
@@ -266,7 +269,7 @@ export class ProfileView extends React.Component {
           <Card.Body>
             <Row>
               <Col xs={12}>
-                <h2>Favorite Movies</h2>
+                <h4>Favorite Movies</h4>
               </Col>
             </Row>
             <Row>

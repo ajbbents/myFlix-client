@@ -125,7 +125,7 @@ export default class MainView extends React.Component {
   // };
 
   render() {
-    const { movies, selectedMovie, user, registered, authData, favoriteMovies, handleFavorite } = this.state;
+    const { movies, user, selectedMovie, registered, authData, favoriteMovies, handleFavorite } = this.state;
 
     // if (!register) return (<RegistrationView onRegistration={(register) => this.onRegistration(register)} />)
 

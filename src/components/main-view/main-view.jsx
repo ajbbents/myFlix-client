@@ -192,6 +192,7 @@ export default class MainView extends React.Component {
                     favoriteMovies={favoriteMovies || []}
                     handleFavorite={this.handleFavorite}
                     onBackClick={() => history.goBack()}
+                    movies={movies}
                   />
                 </Col>
               );

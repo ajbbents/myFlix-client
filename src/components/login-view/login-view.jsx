@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import { RegistrationView } from "../registration-view/registration-view";
-import { Row, Card, Form, Button, Container } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Row, Form, Button, Container } from 'react-bootstrap';
 
 import './login-view.scss';
 
@@ -51,19 +49,12 @@ export function LoginView(props) {
         .then(response => {
           const data = response.data;
           props.onLoggedIn(data);
-          // console.log('its working');
           window.open("/", "_self");
         })
         .catch(e => {
           console.log('no such user')
         });
     }
-  };
-
-  const handleRegisterClick = (e) => {
-    e.preventDefault();
-    console.log("clicked register")
-    props.toRegister(false);
   };
 
   return (

@@ -27,18 +27,6 @@ export class MovieView extends React.Component {
       .catch((error) => console.error(error));
   }
 
-  // keypressCallback(event) {
-  //   console.log(event.key);
-  // }
-
-  // componentDidMount() {
-  //   document.addEventListener('keypress', this.keypressCallback);
-  // }
-
-  // componentWillUnmount() {
-  //   document.removeEventListener('keypress', this.keypressCallback);
-  // }
-
   render() {
     const { movie, onClick, onBackClick, handleFavorite } = this.props;
 
@@ -71,19 +59,12 @@ export class MovieView extends React.Component {
                 <Button variant="link">{movie.Genre.Name}</Button>
               </Link>
             </div>
-            {/* <Route path="/movies/:movieId" render={({ match, history }) => {
-              return <Col md={8}>
-                <MovieView movie={movies.find(m => m._id === match.params.movieId)} onBackClick={() => history.goBack()} />
-              </Col>
-            }} /> */}
             <Button
-              // className="favorite-button mt-2"
               variant="primary"
               onClick={(e) => this.handleFavorite(e)} >Add to favorites
             </Button>
             <Button variant="secondary" onClick={() => { onBackClick(null); }}>Back</Button>
           </div>
-
         </Card.Body>
       </Card>
     );
@@ -108,5 +89,4 @@ MovieView.propTypes = {
     }).isRequired,
   }).isRequired,
   onBackClick: PropTypes.func.isRequired,
-  // handleFavorite: PropTypes.func.isRequired,
 };

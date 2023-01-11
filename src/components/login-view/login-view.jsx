@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 import './login-view.scss';
 
 export function LoginView(props) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [UserName, setUserName] = useState('');
+  const [Password, setPassword] = useState('');
   //declare hook for each input
   const [usernameErr, setUsernameErr] = useState('');
   const [passwordErr, setPasswordErr] = useState('');
@@ -19,20 +19,20 @@ export function LoginView(props) {
   const validate = () => {
     let isReq = true;
 
-    setUsernameErr("");
-    setPasswordErr("");
+    // setUsernameErr("");
+    // setPasswordErr("");
 
-    if (!username) {
+    if (!UserName) {
       setUsernameErr('You have to have a username.');
       isReq = false;
-    } else if (username.length < 2) {
+    } else if (UserName.length < 2) {
       setUsernameErr('Username must be at least 2 characters long');
       isReq = false;
     }
-    if (!password) {
+    if (!Password) {
       setPasswordErr('You have to have a password.');
       isReq = false;
-    } else if (password.length < 6) {
+    } else if (Password.length < 6) {
       setPasswordErr('Password must be at least 6 characters long');
       isReq = false;
     }
@@ -44,9 +44,9 @@ export function LoginView(props) {
     const isReq = validate();
     if (isReq) {
       // send a request to the server for authentication
-      axios.post('https://pickles2001.herokuapp.com/login', {
-        UserName: username,
-        Password: password
+      axios.post(`https://pickles2001.herokuapp.com/login`, {
+        UserName: UserName,
+        Password: Password
       })
         .then(response => {
           const data = response.data;
@@ -73,15 +73,13 @@ export function LoginView(props) {
         <Form>
           <Form.Group controlId="formUsername">
             <Form.Label>Username:</Form.Label>
-            <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
-            {/*code here to display validation error*/}
+            <Form.Control type="text" placeholder="Enter username" value={UserName} onChange={e => setUserName(e.target.value)} />
             {usernameErr && <p>{usernameErr}</p>}
           </Form.Group>
 
           <Form.Group controlId="formPassword">
             <Form.Label>Password:</Form.Label>
-            <Form.Control type="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
-            {/*code here to display validation error*/}
+            <Form.Control type="password" placeholder="Enter password" value={Password} onChange={e => setPassword(e.target.value)} />
             {passwordErr && <p>{passwordErr}</p>}
           </Form.Group>
 
@@ -101,5 +99,3 @@ export function LoginView(props) {
 LoginView.propTypes = {
   onLoggedIn: PropTypes.func.isRequired,
 };
-
-// toRegister: PropTypes.func.isRequired,

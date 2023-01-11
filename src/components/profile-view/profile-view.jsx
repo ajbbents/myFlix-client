@@ -9,10 +9,10 @@ export class ProfileView extends React.Component {
   constructor() {
     super();
     this.state = {
-      UserName: null,
-      Password: null,
-      Email: null,
-      Birthday: null,
+      UserName: ``,
+      // Password: ``,
+      Email: ``,
+      Birthday: ``,
       FavoriteMovies: [],
     };
   }
@@ -31,7 +31,7 @@ export class ProfileView extends React.Component {
       .then((response) => {
         this.setState({
           UserName: response.data.UserName,
-          Password: response.data.Password,
+          // Password: response.data.Password,
           Email: response.data.Email,
           Birthday: response.data.Birthday,
           FavoriteMovies: response.data.FavoriteMovies,
@@ -160,7 +160,7 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.props;
+    const { movies } = this.props;
     const { FavoriteMovies, UserName, Password, Email, Birthday } = this.state;
 
     const myFavoriteMovies = FavoriteMovies.map((movieId) =>
@@ -213,7 +213,7 @@ export class ProfileView extends React.Component {
                       <Form.Control
                         type="password"
                         name="Password"
-                        placeholder="New Password"
+                        placeholder="Password (required)"
                         onChange={(e) => this.setPassword(e.target.value)}
                         required
                       />

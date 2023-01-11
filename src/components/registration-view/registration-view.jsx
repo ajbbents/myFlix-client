@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { Container, Row, Col, Form, Card, Navbar, Nav, Button } from 'react-bootstrap';
@@ -65,10 +64,6 @@ export function RegistrationView(props) {
           console.log(err.response.data);
           alert("unable to register you freaking fool");
         });
-      // .catch((response) => {
-      //   console.error(response);
-      //   alert("Unable to register.....");
-      // });
     }
   };
 

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { Card, Button, Col, Row, Container, Form, Figure } from "react-bootstrap";
 
-import { Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export class ProfileView extends React.Component {
@@ -167,16 +167,6 @@ export class ProfileView extends React.Component {
       movies.find((movie) => movie._id === movieId)
     );
 
-    // const myFavoriteMovies = this.props.movies.filter(movie => FavoriteMovies.includes(movie._id));
-
-    // const myFavoriteMovies = [];
-    // for (let index = 0; index < movies.length; index++) {
-    //   const movie = movies[index];
-    //   if (FavoriteMovies.includes(movie._id)) {
-    //     myFavoriteMovies.push(movie);
-    //   }
-    // }
-
     return (
       <Container>
         <Row>
@@ -235,7 +225,6 @@ export class ProfileView extends React.Component {
                         name="Email"
                         placeholder="New Email"
                         onChange={(e) => this.setEmail(e.target.value)}
-                        required
                       />
                     </Form.Group>
                     <Form.Group>

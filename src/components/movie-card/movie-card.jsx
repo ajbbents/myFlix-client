@@ -19,17 +19,10 @@ export class MovieCard extends React.Component {
             <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
               <Button variant="primary">Open</Button>
             </Link>
-            {/* <Link to={`/directors/${encodeURIComponent(movie.Director.Name)}`}>
-            <Button variant="link">Director</Button>
-          </Link>
-          <Link to={`/genres/${encodeURIComponent(movie.Genre.Name)}`}>
-            <Button variant="link">Genre</Button>
-          </Link> */}
           </Card.Footer>
         </Card.Body>
       </Card>
     );
-    // <div className="movie-card" onClick={() => { onMovieClick(movie); }}>{movie.Title}</div>;
   }
 }
 
@@ -49,5 +42,4 @@ MovieCard.propTypes = {
       Description: PropTypes.string.isRequired
     }).isRequired
   }).isRequired,
-  // onMovieClick: PropTypes.func.isRequired
 };

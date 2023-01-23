@@ -12,10 +12,11 @@
 }
 
 .login-view {
-  width: 100%;
   background: #43464b;
-  justify-items: center;
   font-family: Georgia;
+  position: absolute;
+  top: 25%;
+  bottom: 50%;
 }
 
 

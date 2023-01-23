@@ -14,6 +14,7 @@ export class ProfileView extends React.Component {
       Email: ``,
       Birthday: ``,
       FavoriteMovies: [],
+      movies: [],
     };
   }
 

@@ -69,55 +69,54 @@ export function RegistrationView(props) {
 
   return (
 
-    <Container fluid className="registration-view">
-      <Row className="justify-content-md-center mt-5">
-        <Col md={5}>
-          <Form>
-            <Form.Group controlId="formUsername">
-              <Form.Label>Username:</Form.Label>
-              <Form.Control
-                type="text" placeholder="Create a username"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-              />
-              {usernameErr && <p>{usernameErr}</p>}
-            </Form.Group>
+    <Card className="mt-8 login-view"
+      style={{ width: "18rem", backgroundColor: "#868c96" }}>
+      <Card.Body>
+        <Form>
+          <Form.Group controlId="formUsername">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control
+              type="text" placeholder="Create a username"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+            />
+            {usernameErr && <p>{usernameErr}</p>}
+          </Form.Group>
 
-            <Form.Group controlId="formPassword">
-              <Form.Label>Password:</Form.Label>
-              <Form.Control
-                type="password" placeholder="Password must be 6 characters"
-                minLength="6" value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
-              {passwordErr && <p>{passwordErr}</p>}
-            </Form.Group>
+          <Form.Group controlId="formPassword">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control
+              type="password" placeholder="Password must be 6 characters"
+              minLength="6" value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+            {passwordErr && <p>{passwordErr}</p>}
+          </Form.Group>
 
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address:</Form.Label>
-              <Form.Control
-                type="email" placeholder="Enter Email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
-              {emailErr && <p>{emailErr}</p>}
-              <Form.Text className="text.muted">We'll never share your email with anyone. Pinky promise.</Form.Text>
-            </Form.Group>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address:</Form.Label>
+            <Form.Control
+              type="email" placeholder="Enter Email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+            {emailErr && <p>{emailErr}</p>}
+            <Form.Text className="text.muted">We'll never share your email with anyone. Pinky promise.</Form.Text>
+          </Form.Group>
 
-            <Form.Group controlId="formBirthday">
-              <Form.Label>Birthday:</Form.Label>
-              <Form.Control
-                type="Birthday" placeholder="MM/DD/YYYY"
-                value={birthday}
-                onChange={e => setBirthday(e.target.value)}
-              />
-            </Form.Group>
+          <Form.Group controlId="formBirthday">
+            <Form.Label>Birthday:</Form.Label>
+            <Form.Control
+              type="Birthday" placeholder="MM/DD/YYYY"
+              value={birthday}
+              onChange={e => setBirthday(e.target.value)}
+            />
+          </Form.Group>
 
-            <Button variant="primary" type="submit" onClick={handleSubmit}>Register</Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+          <Button variant="primary" type="submit" onClick={handleSubmit}>Register</Button>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 }
 

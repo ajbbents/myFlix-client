@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import { Row, Form, Button, Container } from 'react-bootstrap';
+import { Row, Form, Button, Container, Card } from 'react-bootstrap';
 
 import './login-view.scss';
 
@@ -58,35 +58,76 @@ export function LoginView(props) {
   };
 
   return (
-    <Container className="login-view">
-      <Row className="justify-content-center m-2">
-
-        <Form>
+    <Card className="mt-8 login-view"
+      style={{ width: "18rem", backgroundColor: "#868c96" }}>
+      <Card.Body>
+        {/* Form for inputting username and password */}
+        <Form onSubmit={handleSubmit}>
+          {/* Input for username */}
           <Form.Group controlId="formUsername">
             <Form.Label>Username:</Form.Label>
             <Form.Control type="text" placeholder="Enter username" value={UserName} onChange={e => setUserName(e.target.value)} />
             {usernameErr && <p>{usernameErr}</p>}
           </Form.Group>
 
+          {/* Input for password */}
           <Form.Group controlId="formPassword">
             <Form.Label>Password:</Form.Label>
             <Form.Control type="password" placeholder="Enter password" value={Password} onChange={e => setPassword(e.target.value)} />
             {passwordErr && <p>{passwordErr}</p>}
           </Form.Group>
 
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
-            Login
-          </Button>
-          <Button variant="secondary" type="button" href={"/register"}>
-            Not registered yet?
-          </Button>
+          <div className="text-center">
+            {/* Submit button */}
+            <Button className="my-3" variant="primary" type="submit">
+              Login
+            </Button>
+          </div>
         </Form>
+        {/* Link to create an account */}
+        <div className="text-center">
+          <p>
+            Not registered yet?{" "}
+            <a href="/register">
+              <strong>Sign up!</strong>
+            </a>
+          </p>
+        </div>
+      </Card.Body>
+    </Card>
 
-      </Row>
-    </Container>
+
+    //   <Container className="login-view">
+    //   <Row className="justify-content-center m-2">
+
+    //     <Form>
+    //       <Form.Group controlId="formUsername">
+    //         <Form.Label>Username:</Form.Label>
+    //         <Form.Control type="text" placeholder="Enter username" value={UserName} onChange={e => setUserName(e.target.value)} />
+    //         {usernameErr && <p>{usernameErr}</p>}
+    //       </Form.Group>
+
+    //       <Form.Group controlId="formPassword">
+    //         <Form.Label>Password:</Form.Label>
+    //         <Form.Control type="password" placeholder="Enter password" value={Password} onChange={e => setPassword(e.target.value)} />
+    //         {passwordErr && <p>{passwordErr}</p>}
+    //       </Form.Group>
+
+    //       <Button variant="primary" type="submit" onClick={handleSubmit}>
+    //         Login
+    //       </Button>
+    //       <Button variant="secondary" type="button" href={"/register"}>
+    //         Not registered yet?
+    //       </Button>
+    //     </Form>
+
+    //   </Row>
+    // </Container>
   );
 }
 
 LoginView.propTypes = {
   onLoggedIn: PropTypes.func.isRequired,
 };
+
+

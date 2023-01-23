@@ -35,7 +35,7 @@ export function NavBar() {
             {isAuth() && (
               <Button variant="link" onClick={onLoggedOut}>Logout</Button>
             )}
-            {!isAuth() && <Nav.Link href="/">Sign-in</Nav.Link>}
+            {!isAuth() && <Nav.Link href="/">Login</Nav.Link>}
             {!isAuth() && <Nav.Link href="/register">Register</Nav.Link>}
           </Nav>
         </Navbar.Collapse>

@@ -4,21 +4,12 @@
   font-family: Georgia;
 }
 
-html, body, .app-container {
-  background-color: #43464b;
-}
-
-.my-flix {
-  color: #43464b;
-}
-
-.main-nav {
+.registration-view {
+  width: 100%;
+  background: #43464b;
+  justify-items: center;
   font-family: Georgia;
 }
-
-
-
-
 
 .login-view {
   width: 100%;
@@ -27,11 +18,20 @@ html, body, .app-container {
   font-family: Georgia;
 }
 
-.registration-view {
-  width: 100%;
-  background: #43464b;
-  justify-items: center;
+
+
+
+
+.main-nav {
   font-family: Georgia;
+}
+
+html, body, .app-container {
+  background-color: #43464b;
+}
+
+.my-flix {
+  color: #43464b;
 }
 
 /*# sourceMappingURL=index.2b25e0b4.css.map */

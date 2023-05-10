@@ -36,5 +36,5 @@ Use React to create a SPA client-side movie application based on existing REST A
 
 <li>Profile View: Allows users to view their registration information and edit user name, password, email, date of birth. Also shows a user's favorite movies and allows them to remove a movie from their list of favorites. In Profile View users can also delete their account.</li>
 </ul>
-Project uses Parcel: parcel src/index.html
+Project uses Parcel: parcel src/index.html<br />
 https://bingeablefilms.netlify.app
